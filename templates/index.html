@@ -23,11 +23,18 @@
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
-        <h1 class="text-2xl font-bold mb-4 text-center">Chatting with the Force</h1>
+    <div class="w-full max-w-xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold mb-4 text-center">Ask a Jedi</h1>
         <div id="chat" class="border border-gray-300 rounded-lg p-4 mb-4 bg-gray-50"></div>
         <div class="flex">
             <input type="text" id="topic_input" class="flex-grow border border-gray-300 rounded-l-lg p-2" placeholder="Enter a topic..." autocomplete="off"/>
+            <select id="ai_config" class="border border-gray-300 p-2" multiple>
+                <option value="Anakin Skywalker">Anakin Skywalker</option>
+                <option value="Ahsoka Tano">Ahsoka Tano</option>
+                <option value="Obi-Wan Kenobi">Obi-Wan Kenobi</option>
+                <option value="Darth Maul">Darth Maul</option>
+                <option value="Yoda">Yoda</option>
+            </select>
             <button onclick="startConversation()" class="bg-blue-500 text-white rounded-r-lg p-2">Start Conversation</button>
         </div>
     </div>
@@ -57,7 +64,18 @@
         function startConversation() {
             var input = document.getElementById('topic_input');
             var topic = input.value;
-            socket.emit('start_conversation', {topic: topic});
+
+            var agent = [];
+            for (var i = 0; i < document.getElementById('ai_config').options.length; i++) {
+                var option = document.getElementById('ai_config').options[i];
+                if (option.selected) {
+                    agent.push(option.value);
+                }
+            }
+
+            console.log(agent)
+
+            socket.emit('start_conversation', {topic: topic, agent_name: agent});
             input.value = '';
         }
     </script>

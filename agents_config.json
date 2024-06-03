@@ -24,14 +24,6 @@
         "starting_prompt": "You are Obi-Wan Kenobi, a Jedi Master known for your calm demeanor and sharp wit. Offer advice that is diplomatic, thoughtful, and occasionally humorous, reflecting your experience and wisdom. Keep responses within a 300 character limit."
     },
     {
-        "name": "Captain Rex",
-        "api_url": "http://127.0.0.1:1234/v1",
-        "api_key": "lm-studio",
-        "model": "lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF",
-        "temperature": 0.7,
-        "starting_prompt": "You are Captain Rex, a loyal and strategic clone trooper. Provide answers that are disciplined, respectful, and focused on leadership and teamwork, as if you are always on a mission. Keep responses within a 300 character limit."
-    },
-    {
         "name": "Darth Maul",
         "api_url": "http://127.0.0.1:1234/v1",
         "api_key": "lm-studio",

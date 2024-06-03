@@ -101,13 +101,20 @@ def index():
 @socketio.on('start_conversation')
 def handle_start_conversation(data):
     topic = data['topic']
+    selectedAgents = data["agent_name"]
+    print(data["agent_name"])
     socketio.emit('new_message', {'role': 'system', 'content': f"Starting conversation on topic: {topic}"})
 
+    tmpAgent = []
+
     for agent in agents:
+        for selected_agent in selectedAgents:
+            if agent.name == selected_agent:
+                tmpAgent.append(agent)
         agent.reset_history()
         agent.history.append({"role": "user", "content": topic})
 
-    threading.Thread(target=run_conversation, args=(agents, topic)).start()
+    threading.Thread(target=run_conversation, args=(tmpAgent, topic)).start()
 
 def run_conversation(agents, initial_message, num_turns=15):
     message = initial_message
